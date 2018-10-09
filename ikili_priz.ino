@@ -5,8 +5,6 @@
 BlynkTimer timer;
 
 
-
-
 //NODEMCU PİNLERİ
 int kled = 5;       // D1
 int mled = 0;       // D3
@@ -33,21 +31,13 @@ bool role1durum = false;
 bool role2durum = false;
 
 
-char auth[] = "14d3fb26feb040e6b2d52e7c452f5467";
-
-
-/*
-  // WiFi Büro
-  char ssid[] = "TA2ANI_connection";
-  char pass[] = "AeF14772380";
-*/
+char auth[] = "................";
 
 
 
-
-// WiFi EV
-char ssid[] = "ELAN";
-char pass[] = "1234AB567C";
+// WiFi BİLGİLERİ
+char ssid[] = "...............";
+char pass[] = "...............";
 
 
 
@@ -58,15 +48,11 @@ BLYNK_WRITE(V0)
   if (sanalbuton1 == 1)
   {
     sayac1 = 1;
-    //    digitalWrite (prizled1, 1);
-    //    digitalWrite (role1, 1);
   }
 
   else
   {
     sayac1 = 2;
-    //    digitalWrite (prizled1, 0);
-    //    digitalWrite (role1, 0);
     delay(50);
     Blynk.virtualWrite(V0, 0);
   }
@@ -79,15 +65,11 @@ BLYNK_WRITE(V1)
   if (sanalbuton2 == 1)
   {
     sayac2 = 1;
-    //    digitalWrite (prizled2, 1);
-    //    digitalWrite (role2, 1);
   }
 
   else
   {
     sayac2 = 2;
-    //    digitalWrite (prizled2, 0);
-    //    digitalWrite (role2, 0);
     delay(50);
     Blynk.virtualWrite(V1, 0);
   }
@@ -114,7 +96,6 @@ BLYNK_CONNECTED()
 {
   Blynk.syncVirtual(V0);
   Blynk.syncVirtual(V1);
-  //  Blynk.syncVirtual(V2);
 }
 
 
@@ -140,7 +121,6 @@ void setup()
   timer.setInterval(10000L, dongu);
   timer.setInterval(10000L, kontrol);
 }
-
 
 
 
@@ -195,7 +175,6 @@ void dongu ()
       sayac1 = 0;
     }
 
-
     if (butondurum2 == HIGH)
     {
       sayac2++;
@@ -222,33 +201,20 @@ void dongu ()
     {
       sayac2 = 0;
     }
-    Serial.print ("sayac 1 = ");
-    Serial.println (sayac1);
-    Serial.print ("sayac 2 = ");
-    Serial.println (sayac2);
   }
 }
 
 
 void kontrol()
 {
-  Serial.println ("BAGLANTI KOPTU");
   while (!dongudurum)
   {
     analogWrite (yled, 1023);
     analogWrite (kled, 0);
     analogWrite (mled, 1023);
 
-
     if (WiFi.status() != WL_CONNECTED)
     {
-      Serial.println ("WIFI DENENIYOR");
-      //      digitalWrite (prizled1, 1);
-      //      delay (250);
-      //      digitalWrite (prizled1, 0);
-      //      digitalWrite (prizled2, 1);
-      //      delay (250);
-      //      digitalWrite (prizled2, 0);
       WiFi.begin (ssid, pass);
       delay (1000);
       Blynk.begin(auth, ssid, pass);
@@ -260,8 +226,6 @@ void kontrol()
     }
   }
 }
-
-
 
 
 
